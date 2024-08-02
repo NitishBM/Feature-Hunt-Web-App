@@ -1,39 +1,42 @@
 <template>
-    <div class="block text-center mt-4 mb-4">
-        <el-carousel trigger="click" height="150px">
-            <el-carousel-item v-for="item in 4" :key="item">
-                <h3 class="small justify-center" text="2xl">{{ items }}</h3>
-            </el-carousel-item>
-        </el-carousel>
-    </div>
+    <el-carousel indicator-position="outside">
+        <el-carousel-item v-for="(item, index) in images" :key="index">
+            <div class="carousel-item-content">
+                <img :src="item" :alt="'Image ' + (index + 1)" />
+            </div>
+        </el-carousel-item>
+    </el-carousel>
 </template>
 
 <script>
 export default {
-    name:'Carousel',
+    name: 'Carousel',
     data() {
         return {
-            item: [
-                {
-                    items: './assets/carousel/img1.jpg'
-                }
-            ],
-        }
+            images: [
+                './src/assets/Carousel/img1.jpg',
+                './src/assets/Carousel/img2.jpg',
+                './src/assets/Carousel/img3.jpg',
+                './src/assets/Carousel/img4.jpg',
+                './src/assets/Carousel/img5.jpg',
+            ]
+        };
     }
 }
 </script>
 
 <style scoped>
-.demonstration {
-    color: var(--el-text-color-secondary);
+.carousel-item-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: #f5f5f5;
 }
 
-.el-carousel__item h3 {
-    color: #475669;
-    opacity: 0.75;
-    line-height: 150px;
-    margin: 0;
-    text-align: center;
+.carousel-item-content img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .el-carousel__item:nth-child(2n) {

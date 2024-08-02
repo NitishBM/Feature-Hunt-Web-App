@@ -1,170 +1,22 @@
-<!-- <template>
-
-    <div class="container">     
-
-      <div class="row justify-content-around">
-        <div v-for="(card, index) in cardsData" :key="index" class="col-md-3 col-sm-4 m-1">
-          <div class="card mt-2">
-            <img :src="card.image" class="card-img-top mt-2" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ card.title }}</h5>
-              <div class="card-text text-center">
-                {{ truncateText(card.text) }}
-                <button v-if="card.text.length > 80" @click="showPopup(index)" class="btn btn-link">Read More</button>
-                <div v-if="showPopupIndex === index && card.text.length > 80" class="popup">
-                  {{ card.text }}
-                <a href="#" class="btn btn-primary mt-4" >Vote</a>
-                </div>
-                <a href="#" class="btn btn-primary mt-4" >Vote</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-    
-
-</template>
-  
-  <script>
-import { ref } from 'vue';
-  export default {
-    name: 'Cards',
-    setup() {
-      const cardsData = ref([
-        { 
-          title: 'Apple',
-          text: 'Some quick example text to build on the card title Some quick example text to build on the card title Some quick example text to build on the card title Some quick example text to build on the card title',
-          image: '/src/assets/Apple.png'
-        },
-        { 
-          title: 'LinkedIn',
-          text: 'Some quick example text to build on the card',
-          image: '/src/assets/Linkedin.png'
-        },
-        { 
-          title: 'Instagram',
-          text: 'Some quick example text to build on the card title',
-          image: '/src/assets/Instagram.png'
-        },
-        { 
-          title: 'Amazon',
-          text: 'Some quick example text to build on the card title',
-          image: '/src/assets/Amazon.png'
-        },
-        { 
-          title: 'Facebook',
-          text: 'Some quick example text to build on the card title',
-          image: '/src/assets/Facebook.png'
-        },
-        { 
-          title: 'Maps',
-          text: 'Some quick example text to build on the card title',
-          image: '/src/assets/Maps.png'
-        },
-        { 
-          title: 'Messenger',
-          text: 'Some quick example text to build on the card title',
-          image: '/src/assets/Messenger.png'
-        },
-        { 
-          title: 'Twitter',
-          text: 'Some quick example text to build on the card title',
-          image: '/src/assets/Twitter.png'
-        },
-        { 
-          title: 'Youtube',
-          text: 'Some quick example text to build on the card title',
-          image: '/src/assets/Youtube.png'
-        },
-      ]);
-
-      const showPopupIndex = ref (-1);
-
-      const truncateText = (text) => {
-        if (text.length > 80) {
-          return text.slice(0, 80) + '...';
-        }
-        return text;
-      };
-      
-      const showPopup = (index) => {
-        showPopupIndex.value = index;
-      };
-
-
-
-      return {
-        cardsData,
-        showPopupIndex,
-        truncateText,
-        showPopup,
-      };
-    },
-  };
-  </script>
-  
-  <style scoped>
-  .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    z-index: 1000;
-  }
-
-  .card {
-    width: 100%;
-    height: 100%;
-  }
-
-  .card img{
-    width: 50px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  
-.btn-primary {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.card-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-img-top:hover {
-    transform: scale(1.2);
-    transition: 0.1s transform linear;
-}
-  </style>
-   -->
-
-
-
 <template>
-  <Carousel/>
-  <div class="container">
+  <!-- <Carousel /> -->
+  <div class="container h-screen">
     <div class="row">
-      <div v-for="(item, index) in items" :key="index" class="col-md-4 mb-4">
-        <div class="card mt-4 bg-white rounded shadow">
-          <img v-if="item.image" :src="item.image" class="card-img-top mt-3 " alt="...">
+      <div v-for="(item, index) in items" :key="index" class="col-md-4 mb-4 text-center">
+        <div class="card mt-4 bg-white h-100">
+          <img v-if="item.ideaBrandIconUrl" :src="item.ideaBrandIconUrl" class="rounded-5 m-auto w-10 mt-3 transition-transform duration-300 hover:scale-110" />          
           <div class="card-body">
-            <h5 class="card-title">{{ truncateText(item.title, 20) }}</h5>
-            <p class="card-text">{{ truncateText(item.text, 80) }}</p>
-            <button class="btn " @click="navigateToDetails(item)">Read More</button>
-            <a href="#" class="btn btn-primary mt-4">Vote</a>
+            <p class="card-title text-sm"><strong> {{ item.ideaBrandName }}</strong></p>
+            <h5 class="card-title">{{ truncateText(item.ideaTitle, 20) }}</h5>
+            <p class="card-text text-sm">{{ truncateText(item.ideaDescription, 80) }}</p>
+            <!-- <p><strong>Brand Name:</strong> {{ item.ideaBrandName }}</p> -->
+            <!-- <p><strong>Created On:</strong> {{ item.ideaCreatedOn }}</p>
+            <p><strong>Status:</strong> {{ item.status }}</p>
+            <p><strong>User Email:</strong> {{ item.ideaUserEmail }}</p> -->
+            <div class="flex justify-between">
+              <div class="mt-3 cursor-pointer" @click="navigateToDetails(item)">Read More</div>
+              <div href="#" class="btn btn-primary btn-sm mt-3">Vote</div>
+            </div>
           </div>
         </div>
       </div>
@@ -172,116 +24,56 @@ import { ref } from 'vue';
   </div>
 
   <FooterVue />
-
 </template>
-  
+
 <script>
-import { useRouter } from 'vue-router';
 import Carousel from './Carousel.vue';
-import FooterVue from './Footer.vue'
+import FooterVue from './Footer.vue';
+import axios from 'axios';
 
 export default {
   name: 'Home',
   components: {
-    FooterVue, 
+    FooterVue,
     Carousel
   },
   data() {
     return {
-      items: [
-      { 
-        title: 'Apple',
-        text: 'Some quick example text to build on the card title Some quick example text to build on the card title Some quick example text to build on the card title Some quick example text to build on the card title',
-        image: '/src/assets/Apple.png'
-      },
-      { 
-        title: 'LinkedIn',
-        text: 'Some quick example text to build on the card title',
-        image: '/src/assets/Linkedin.png'
-      },
-      { 
-        title: 'Instagram',
-        text: 'Some quick example text to build on the card title',
-        image: '/src/assets/Instagram.png'
-      },
-      { 
-        title: 'Amazon',
-        text: 'Some quick example text to build on the card title',
-        image: '/src/assets/Amazon.png'
-      },
-      { 
-        title: 'Facebook',
-        text: 'Some quick example text to build on the card title',
-        image: '/src/assets/Facebook.png'
-      },
-      { 
-        title: 'Maps',
-        text: 'Some quick example text to build on the card title',
-        image: '/src/assets/Maps.png'
-      },
-      { 
-        title: 'Messenger',
-        text: 'Some quick example text to build on the card title',
-        image: '/src/assets/Messenger.png'
-      },
-      { 
-        title: 'Twitter',
-        text: 'Some quick example text to build on the card title',
-        image: '/src/assets/Twitter.png'
-      },
-      { 
-        title: 'Youtube',
-        text: 'Some quick example text to build on the card title',
-        image: '/src/assets/Youtube.png'
-      },
-      ],
+      items: []
     };
   },
-  setup() {
-    const router = useRouter();
+  created() {
+    this.fetchItems();
+  },
+  methods: {
+    async fetchItems() {
+      try {
+        const response = await axios.get('https://api.airtable.com/v0/appGhVDE7BSPhNOVe/user_ideas', {
+          headers: {
+            Authorization: 'Bearer patekPzL7ymryxU2j.cf7c8969aff387077c18bea5f321902e3b9b8a98b013f25f12db416d9b74fbdb'
+          }
+        });
+        this.items = response.data.records.map(record => ({
+          ideaTitle: record.fields.ideaTitle || '',
+          ideaDescription: record.fields.ideaDescription || '',
+          ideaBrandIconUrl: record.fields.ideaBrandIconUrl || '',
 
-    const truncateText = (text, maxLength) => {
+          // ideaBrandName: record.fields.ideaBrandName || '',
+          // ideaCreatedOn: record.fields.ideaCreatedOn || '',
+          // status: record.fields.status || '',
+          // ideaUserEmail: record.fields.ideaUserEmail || ''
+        }));
+      } catch (error) {
+        console.error('Error fetching data from Airtable:', error);
+      }
+    },
+    truncateText(text, maxLength) {
+      if (!text) return '';
       return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
-    };
-
-    const navigateToDetails = (item) => {
-      router.push({ name: 'CardDetails', params: { item } });
-    };
-
-    return {
-      truncateText,
-      navigateToDetails,
-    };
-  },
+    },
+    navigateToDetails(item) {
+      this.$router.push({ name: 'CardDetails', params: { item } });
+    }
+  }
 };
 </script>
-
-
-<style>
-
-  .card img{
-    width: 50px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  
-.btn-primary {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.card-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-img-top:hover {
-    transform: scale(1.2);
-    transition: 0.1s transform linear;
-}
-</style>

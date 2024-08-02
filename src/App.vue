@@ -1,8 +1,11 @@
+<template>
+  <div>
+    <NavHeaderVue />
+    <router-view />
+  </div>
+</template>
+
 <script>
-import CardDetailsVue from './components/CardDetails.vue'
-import CardsVue from './components/Home.vue'
-import HomeVue from './components/Home.vue'
-// import NavBarVue from './components/NavBar.vue'
 import NavHeaderVue from './components/NavHeader.vue'
 
 
@@ -10,33 +13,15 @@ import NavHeaderVue from './components/NavHeader.vue'
 export default {
   name: 'App',
   components: {
-
-    // NavBarVue,
     NavHeaderVue,
-    // HomeVue,
-    // CardsVue,
-    // CardDetailsVue
-    
-    
   }
 }
 </script>
-
-<template>
-  <!-- <NavBarVue /> -->
-  <!-- <HomeVue />
-  <CardsVue />
-  <CardDetailsVue /> -->
-
-  <div>
-    <!-- <NavBarVue /> -->
-    <NavHeaderVue />
-    
-    <!-- Other template content here -->
-    <router-view />
-  </div>
-</template>
-
-<style scoped>
-
+<style>
+*{
+  font-family: "Lexend", sans-serif;
+  color: #4E4E4E;
+}
 </style>
+
+
